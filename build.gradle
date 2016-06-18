@@ -27,13 +27,19 @@ allprojects {
         ashleyVersion = '1.7.0'
         aiVersion = '1.8.0'
         kotlinVersion = '1.0.2'
+        junitVersion = '4.12'
+        testngVersion = '6.9.10'
+        spekVersion = '1.0.9'
+        mockitoVersion = '0.5.0'
     }
 
     repositories {
         mavenLocal()
         mavenCentral()
+        jcenter()
         maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
         maven { url "https://oss.sonatype.org/content/repositories/releases/" }
+        maven { url "http://repository.jetbrains.com/all" }
     }
 }
 
