@@ -1,8 +1,9 @@
 package be.julien.messaging.broker
 
-import be.julien.messaging.actors.Listener
-import be.julien.messaging.events.Event
-import be.julien.messaging.events.EventType
+import be.julien.engine.messaging.actors.Listener
+import be.julien.engine.messaging.broker.ShadowBroker
+import be.julien.engine.messaging.events.Event
+import be.julien.engine.messaging.events.EventType
 import com.nhaarman.mockito_kotlin.mock
 import com.nhaarman.mockito_kotlin.times
 import com.nhaarman.mockito_kotlin.verify
@@ -14,7 +15,8 @@ import org.jetbrains.spek.api.Spek
 class ShadowBrokerTest: Spek({
 
     describe("the shadow broker") {
-        val broker = ShadowBroker()
+        val broker = ShadowBroker
+
         val listener: Listener = mock()
 
         it("should register listeners") {
@@ -27,7 +29,7 @@ class ShadowBrokerTest: Spek({
             event.type = EventType.GAME_STARTED
             broker.post(event)
             verify(listener, times(2)).onMessage(event)
-        }
+         }
     }
 
 })
