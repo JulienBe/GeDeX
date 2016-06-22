@@ -1,6 +1,7 @@
 package be.julien;
 
 import be.julien.main.Game;
+import be.julien.main.GdxProvider;
 import com.badlogic.gdx.ApplicationAdapter;
 
 public class Gedex extends ApplicationAdapter {
@@ -9,11 +10,12 @@ public class Gedex extends ApplicationAdapter {
 	
 	@Override
 	public void create () {
-		game.INSTANCE.create();
+        game = new Game(new GdxProvider());
+		game.create();
 	}
 
 	@Override
 	public void render () {
-		game.INSTANCE.render();
+		game.render();
 	}
 }

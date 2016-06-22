@@ -1,7 +1,7 @@
-package be.julien.messaging.events
+package be.julien.engine.messaging.events
 
-import be.julien.messaging.actors.EventSender
-import be.julien.messaging.actors.UndefiniedSender
+import be.julien.engine.messaging.actors.EventSender
+import be.julien.engine.messaging.actors.UndefiniedSender
 import com.badlogic.gdx.utils.Pool
 
 /**
@@ -14,6 +14,11 @@ class Event: Pool.Poolable {
     var message: Message = Message()
 
     override fun reset() {}
+
+    fun type(type: EventType): Event {
+        this.type = type
+        return this;
+    }
 }
 
 object EventPool: Pool<Event>(){

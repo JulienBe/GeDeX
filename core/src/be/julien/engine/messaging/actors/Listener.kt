@@ -1,6 +1,6 @@
-package be.julien.messaging.actors
+package be.julien.engine.messaging.actors
 
-import be.julien.messaging.events.Event
+import be.julien.engine.messaging.events.Event
 
 /**
  * Created by julein on 18/06/16.

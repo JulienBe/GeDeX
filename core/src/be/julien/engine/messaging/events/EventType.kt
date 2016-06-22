@@ -1,4 +1,4 @@
-package be.julien.messaging.events
+package be.julien.engine.messaging.events
 
 /**
  * Created by julein on 18/06/16.
