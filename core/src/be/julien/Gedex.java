@@ -1,6 +1,6 @@
 package be.julien;
 
-import be.julien.main.Game;
+import be.julien.game.Game;
 import be.julien.main.GdxProvider;
 import com.badlogic.gdx.ApplicationAdapter;
 

@@ -1,8 +1,9 @@
-package be.julien.main
+package be.julien.game
 
 import be.julien.engine.messaging.actors.Listener
 import be.julien.engine.messaging.broker.ShadowBroker
 import be.julien.engine.messaging.events.EventType
+import be.julien.main.Provider
 import com.nhaarman.mockito_kotlin.argThat
 import com.nhaarman.mockito_kotlin.mock
 import com.nhaarman.mockito_kotlin.verify
