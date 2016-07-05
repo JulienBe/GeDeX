@@ -6,7 +6,7 @@ import messages.ChangeTiles
 /**
   * Created by julein on 26/06/16.
   */
-class GameStateManipulator extends Actor {
+class Hub extends Actor {
 
   override def receive = {
     case ChangeTiles(tiles) => println("changing tiles " + tiles)
