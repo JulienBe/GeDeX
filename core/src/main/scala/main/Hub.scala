@@ -8,8 +8,10 @@ import messages.ChangeTiles
   */
 class Hub extends Actor {
 
+
+
   override def receive = {
-    case ChangeTiles(tiles) => println("changing tiles " + tiles)
+    case ChangeTiles(tiles) => GameState.apply(tiles)
   }
 
 }
