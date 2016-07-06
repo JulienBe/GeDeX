@@ -8,8 +8,13 @@ import main.Agrippa
 class World {
 
   def createWorld() = {
-    val list = List.tabulate(10)(i => new Tuple2[Int, Tile](i, new Tile))
+    val list = List.tabulate(10)(i => new Tuple2[Int, Tile](i, new Tile(i * Tile.width, 1)))
     Agrippa.setTiles(list)
   }
 
+}
+
+object World {
+  val width = 160
+  val height = 100
 }
