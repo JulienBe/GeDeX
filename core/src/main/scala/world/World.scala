@@ -1,6 +1,6 @@
 package world
 
-import main.Agrippa
+import main.GameState
 
 /**
   * Created by julien on 25/06/16.
@@ -9,7 +9,7 @@ class World {
 
   def createWorld() = {
     val list = List.tabulate(10)(i => new Tuple2[Int, Tile](i, Tile.getTile(i, 1)))
-    Agrippa.setTiles(list)
+    GameState.setTiles(list)
   }
 
 }

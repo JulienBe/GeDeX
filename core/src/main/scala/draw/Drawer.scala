@@ -2,7 +2,7 @@ package draw
 
 import com.badlogic.gdx.graphics.GL20
 import com.badlogic.gdx.{Gdx, Screen}
-import main.{Agrippa, GdxProvider}
+import main.{GameState, GdxProvider}
 
 /**
   * Created by julein on 05/07/16.
@@ -20,7 +20,7 @@ class Drawer(val gdxProvider: GdxProvider) extends Screen {
 
     spriteBatch.begin()
 //    Agrippa.gameState.tiles.foreach(_._2.draw(spriteBatch))
-    Agrippa.gameState.dynamicSprites.foreach(_.draw(spriteBatch))
+    GameState.gameState.dynamicSprites.foreach(_.draw(spriteBatch))
     spriteBatch.end()
   }
 
