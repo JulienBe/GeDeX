@@ -9,7 +9,11 @@ import world.World
   * Created by julein on 05/07/16.
   */
 trait GdxProvider {
-  def getCamera() = new OrthographicCamera(World.width, World.height)
+  def getCamera() = {
+    val cam = new OrthographicCamera(World.width, World.height)
+    cam.position.set(cam.viewportWidth / 2f, cam.viewportHeight / 2f, 0)
+    cam
+  }
   def getShapeRenderer() = new ShapeRenderer()
   def getSpriteBatch() = new SpriteBatch()
 }
