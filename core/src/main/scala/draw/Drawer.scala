@@ -20,8 +20,7 @@ class Drawer(val gdxProvider: GdxProvider) extends Screen {
     spriteBatch.setProjectionMatrix(camera.combined)
 
     spriteBatch.begin()
-    for (pair <- Agrippa.gameState.tiles)
-      spriteBatch.draw(Tile.tr, pair._2.x, pair._2.y, Tile.width, Tile.height)
+    Agrippa.gameState.tiles.foreach(_._2.draw(spriteBatch))
     spriteBatch.end()
   }
 
