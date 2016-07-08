@@ -1,22 +1,18 @@
 package main
 
 import com.badlogic.gdx.graphics.g2d.Sprite
-import world.Tile
+import world.{GameWorld, Tile}
 
 /**
   * Created by julein on 05/07/16.
   */
-case class GameState(var tiles: List[(Int, Tile)], var dynamicSprites: List[Sprite])
+case class GameState(var tiles: List[(Int, Tile)], var dynamicSprites: List[Sprite], val gameWorld: GameWorld)
 
 object GameState {
-  val gameState = new GameState(List.empty, List.empty)
+  val inst = new GameState(List.empty, List.empty, new GameWorld())
 
-  def setTiles(list: List[(Int, Tile)]) = {
-    gameState.tiles = list
-  }
+  def setTiles(list: List[(Int, Tile)]) = inst.tiles = list
 
-  def addSprite(sprite: Sprite): Unit = {
-    gameState.dynamicSprites = gameState.dynamicSprites :+ sprite
-  }
+  def addSprite(sprite: Sprite) = inst.dynamicSprites = inst.dynamicSprites :+ sprite
 
 }
