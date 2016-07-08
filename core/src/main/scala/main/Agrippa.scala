@@ -1,23 +1,19 @@
 package main
 
-import akka.actor.{ActorRef, ActorSystem, Props}
+import akka.actor.ActorSystem
 import com.badlogic.gdx.Game
-import creature.Creature
+import com.badlogic.gdx.physics.box2d.Box2D
 import draw.Drawer
-import world.World
+import world.GameWorld
 
 object Agrippa extends Game {
 
   val system = ActorSystem()
-  val world = new World
 
-  override def create(): Unit = {
-    world.createWorld()
+  override def create() = {
+    Box2D.init()
+    GameWorld.createWorld()
     setScreen(new Drawer(new GdxProvider {}))
-    for (i <- 1 until 20) {
-      val creature = system.actorOf(Props[Creature])
-      creature.tell("Live", ActorRef.noSender)
-    }
   }
 
 }

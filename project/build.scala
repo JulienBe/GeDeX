@@ -20,6 +20,7 @@ object Settings {
     scalaVersion := (scalaVersion in LocalProject("all-platforms")).value,
     libraryDependencies ++= Seq(
       "com.badlogicgames.gdx" % "gdx" % libgdxVersion.value,
+      "com.badlogicgames.gdx" % "gdx-box2d" % libgdxVersion.value,
       "com.typesafe.akka" %% "akka-actor" % "2.4.7",
       "com.typesafe.akka" % "akka-testkit_2.11" % "2.4.7",
       "org.scalamock" %% "scalamock-scalatest-support" % "3.2.2" % "test"
@@ -51,7 +52,8 @@ object Settings {
     libraryDependencies ++= Seq(
       "net.sf.proguard" % "proguard-base" % "4.11" % "provided",
       "com.badlogicgames.gdx" % "gdx-backend-lwjgl" % libgdxVersion.value,
-      "com.badlogicgames.gdx" % "gdx-platform" % libgdxVersion.value classifier "natives-desktop"
+      "com.badlogicgames.gdx" % "gdx-platform" % libgdxVersion.value classifier "natives-desktop",
+      "com.badlogicgames.gdx" % "gdx-box2d-platform" % libgdxVersion.value classifier("natives-desktop")
     ),
     fork in Compile := true,
     unmanagedResourceDirectories in Compile += file("android/assets"),
