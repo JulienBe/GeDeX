@@ -12,7 +12,5 @@ object GameState {
   val inst = new GameState(List.empty, List.empty, new GameWorld())
 
   def setTiles(list: List[(Int, Tile)]) = inst.tiles = list
-
   def addSprite(sprite: Sprite) = inst.dynamicSprites = inst.dynamicSprites :+ sprite
-
 }

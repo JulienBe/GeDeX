@@ -2,7 +2,8 @@ package draw
 
 import com.badlogic.gdx.graphics.GL20
 import com.badlogic.gdx.{Gdx, Screen}
-import main.{GameState, GdxProvider}
+import main.GdxProvider
+import world.GameWorld
 
 /**
   * Created by julein on 05/07/16.
@@ -19,10 +20,10 @@ class Drawer(val gdxProvider: GdxProvider) extends Screen {
     Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT)
     spriteBatch.setProjectionMatrix(camera.combined)
 
-    box2DDebugRenderer.render(GameState.inst.gameWorld.box2Dworld, camera.combined)
+    box2DDebugRenderer.render(GameWorld.box2Dworld, camera.combined)
 
     spriteBatch.begin()
-//    Agrippa.gameState.tiles.foreach(_._2.draw(spriteBatch))
+//    GameState.inst.tiles.foreach(_._2.draw(spriteBatch))
 //    GameState.gameState.dynamicSprites.foreach(_.draw(spriteBatch))
     spriteBatch.end()
   }
