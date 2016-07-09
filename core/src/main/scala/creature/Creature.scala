@@ -1,36 +1,33 @@
 package creature
 
-import akka.actor.Actor
-import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.files.FileHandle
 import com.badlogic.gdx.graphics.Texture
 import com.badlogic.gdx.graphics.g2d.Sprite
-import main.GameState
-import world.{GameWorld, GameWorld$, Tile}
+import com.badlogic.gdx.physics.box2d.BodyDef.BodyType.DynamicBody
+import com.badlogic.gdx.physics.box2d.World
+import world.GameWorld
 
 import scala.util.Random
 
 /**
   * Created by julein on 07/07/16.
+  * TODO : Test each is own world
   */
 class Creature {
 
-  var x = 0
+  var x = 20
+  var y = 20
+
   val sprite = {
     val sprite = new Sprite(Creature.texture)
     sprite.setBounds(10, Random.nextInt(GameWorld.height), 10, 10)
     sprite
   }
 
-  def live() = {
-    Gdx.app.postRunnable(new Runnable {
-      override def run() = {
-        GameState.addSprite(sprite)
-      }
-    })
-    while(true) {
-      sprite.setX(sprite.getX + 1)
-      Thread sleep(10)
+  def live(creatureGenome: CreatureGenome, world: World) = {
+    for (genome <- creatureGenome.bodies) {
+      val bodyDef = genome._1.createBodyDef(x, y, DynamicBody)
+      val body = genome._2.createShape(bodyDef, world)
     }
   }
 
