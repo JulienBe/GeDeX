@@ -1,6 +1,6 @@
 package scala.main
 
-import main.Creator
+import brols.Creator
 import org.scalatest.FlatSpec
 
 import scala.util.Random

@@ -1,4 +1,4 @@
-package main
+package brols
 
 import scala.util.Random
 

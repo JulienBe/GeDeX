@@ -1,5 +1,7 @@
 package creature
 
+import brols.Creator
+
 import scala.util.Random
 
 /**
@@ -15,7 +17,7 @@ object CreatureGenome {
     val bodiesGenome = List.tabulate(nbBodies)(i =>
       new Tuple2[BodyGenome, ShapeGenome](BodyGenome.create(), ShapeGenome.create())
     )
-    val nbJoint = (nbBodies - 1) + (Random.nextFloat() * nbBodies * 2)
+    val nbJoint = Creator.valueInBounds(nbBodies - 1, nbBodies * (nbBodies - 1))
     val jointGenome = List.tabulate(nbJoint.toInt)(i =>
       JointGenome.createJoint(bodiesGenome)
     )

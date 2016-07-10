@@ -3,7 +3,7 @@ package main
 import akka.actor.ActorSystem
 import com.badlogic.gdx.Game
 import com.badlogic.gdx.physics.box2d.Box2D
-import draw.Drawer
+import draw.{Drawer, GdxProvider}
 import world.GameWorld
 
 object Agrippa extends Game {
@@ -13,7 +13,7 @@ object Agrippa extends Game {
   override def create() = {
     Box2D.init
     GameWorld.createWorld
-    GameWorld.createInitialPopulation(5)
+    GameWorld.createInitialPopulation(50)
     setScreen(new Drawer(new GdxProvider {}))
   }
 

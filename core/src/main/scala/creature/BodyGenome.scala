@@ -1,7 +1,7 @@
 package creature
 
+import brols.Creator
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType
-import main.Creator
 import world.PhysicWizard
 
 /**

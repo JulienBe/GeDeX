@@ -18,7 +18,7 @@ object GameWorld {
 
   def createInitialPopulation(max: Int) = {
     creatures = List.tabulate(max)( i =>
-      new Creature(CreatureGenome.createGenome(1, 6)).live(box2Dworld)
+      new Creature(CreatureGenome.createGenome(2, 10)).live(box2Dworld)
     )
   }
   def createWorld() = {
