@@ -14,6 +14,8 @@ class Tile() extends Sprite {
 
 object Tile {
   val tr = new Texture(new FileHandle("square.png"))
+  val category: Short = 0x0002
+  val mask: Short = -1
   val width = 10
   val height = 10
 
@@ -25,7 +27,7 @@ object Tile {
     tile.setRegion(tr)
     tile.setBounds(x * width, y * height, width, height)
     PhysicWizard.setBodyDefPos(x * width, y * height, width, height, tile.bodyDef)
-    PhysicWizard.createBox(tile.bodyDef, width, height, world)
+    PhysicWizard.createBox(tile.bodyDef, width, height, world, mask, category)
     tile
   }
 

@@ -17,15 +17,14 @@ object PhysicWizard {
     bodyDef
   }
 
-  def createBox(bodyDef: BodyDef, width: Float, height: Float, world: World, mask: Short = 0x0001) = {
+  def createBox(bodyDef: BodyDef, width: Float, height: Float, world: World, mask: Short, category: Short) = {
     val body = world.createBody(bodyDef)
     val shape = new PolygonShape()
     shape.setAsBox(width / 2, height / 2)
-    val fixture = body.createFixture(shape, 0)
+    val fixture = body.createFixture(shape, 1)
     val filter = new Filter
     filter.maskBits = mask
-    filter.categoryBits = mask
-    filter.groupIndex = mask
+    filter.categoryBits = category
     fixture.setFilterData(filter)
     shape.dispose()
     body

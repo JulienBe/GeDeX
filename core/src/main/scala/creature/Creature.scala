@@ -5,7 +5,7 @@ import com.badlogic.gdx.graphics.Texture
 import com.badlogic.gdx.graphics.g2d.Sprite
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType.DynamicBody
 import com.badlogic.gdx.physics.box2d.World
-import world.GameWorld
+import world.{GameWorld, Tile}
 
 import scala.util.Random
 
@@ -24,9 +24,9 @@ class Creature {
     sprite
   }
 
-  def live(creatureGenome: CreatureGenome, world: World, mask: Short) = {
+  def live(creatureGenome: CreatureGenome, world: World) = {
     val bodies = List.tabulate(creatureGenome.bodies.length)( i =>
-      creatureGenome.bodies(i)._2.createShape(creatureGenome.bodies(i)._1.createBodyDef(x, y, DynamicBody), world, mask)
+      creatureGenome.bodies(i)._2.createShape(creatureGenome.bodies(i)._1.createBodyDef(x, y, DynamicBody), world, Creature.mask, Creature.category)
     )
     for (joint <- creatureGenome.joints) {
       joint.createJoint(bodies, world)
@@ -36,5 +36,7 @@ class Creature {
 }
 
 object Creature {
+  val category : Short = 0x0001
+  val mask: Short = Tile.category
   val texture = new Texture(new FileHandle("square.png"))
 }
