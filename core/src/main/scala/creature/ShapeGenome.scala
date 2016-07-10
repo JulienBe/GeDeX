@@ -9,7 +9,7 @@ import scala.util.Random
   * Created by julein on 09/07/16.
   */
 case class ShapeGenome(val width: Float, val height: Float) {
-  def createShape(bodyDef: BodyDef, world: World): Body = PhysicWizard.createBox(bodyDef, width, height, world)
+  def createShape(bodyDef: BodyDef, world: World, mask: Short): Body = PhysicWizard.createBox(bodyDef, width, height, world, mask)
 }
 
 object ShapeGenome {

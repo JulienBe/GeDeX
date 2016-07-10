@@ -24,10 +24,10 @@ class Creature {
     sprite
   }
 
-  def live(creatureGenome: CreatureGenome, world: World) = {
+  def live(creatureGenome: CreatureGenome, world: World, mask: Short) = {
     for (genome <- creatureGenome.bodies) {
       val bodyDef = genome._1.createBodyDef(x, y, DynamicBody)
-      val body = genome._2.createShape(bodyDef, world)
+      val body = genome._2.createShape(bodyDef, world, mask)
     }
   }
 

@@ -1,7 +1,7 @@
 package world
 
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType
-import com.badlogic.gdx.physics.box2d.{BodyDef, PolygonShape, World}
+import com.badlogic.gdx.physics.box2d.{BodyDef, Filter, PolygonShape, World}
 
 /**
   * Created by julein on 09/07/16.
@@ -17,11 +17,16 @@ object PhysicWizard {
     bodyDef
   }
 
-  def createBox(bodyDef: BodyDef, width: Float, height: Float, world: World) = {
+  def createBox(bodyDef: BodyDef, width: Float, height: Float, world: World, mask: Short = 0x0001) = {
     val body = world.createBody(bodyDef)
     val shape = new PolygonShape()
     shape.setAsBox(width / 2, height / 2)
-    body.createFixture(shape, 0)
+    val fixture = body.createFixture(shape, 0)
+    val filter = new Filter
+    filter.maskBits = mask
+    filter.categoryBits = mask
+    filter.groupIndex = mask
+    fixture.setFilterData(filter)
     shape.dispose()
     body
   }

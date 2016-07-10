@@ -21,7 +21,7 @@ object GameWorld {
     for (i <- 1 until max) {
       val genome = CreatureGenome.createGenome(1, 6)
       val creature = new Creature()
-      creature.live(genome, box2Dworld)
+      creature.live(genome, box2Dworld, i.toShort)
     }
   }
   def createWorld() = {
