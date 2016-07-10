@@ -1,6 +1,6 @@
 package creature
 
-import com.badlogic.gdx.physics.box2d.joints.DistanceJointDef
+import com.badlogic.gdx.physics.box2d.joints.RevoluteJointDef
 import com.badlogic.gdx.physics.box2d.{Body, World}
 
 import scala.util.Random
@@ -12,10 +12,11 @@ case class JointGenome(bodiesIndexes: (Int, Int), dampingRatio: Float, freq: Flo
   def createJoint(bodies: List[Body], world: World) = {
     val bodyA = bodies(bodiesIndexes._1)
     val bodyB = bodies(bodiesIndexes._2)
-    val jointDef = new DistanceJointDef
-    jointDef.dampingRatio = dampingRatio
-    jointDef.frequencyHz = 10 + freq
-    jointDef.initialize(bodyA, bodyB, bodyA.getWorldCenter, bodyB.getWorldCenter)
+    val jointDef = new RevoluteJointDef
+    jointDef.enableMotor = true
+    jointDef.motorSpeed = 600
+    jointDef.maxMotorTorque = 600
+    jointDef.initialize(bodyA, bodyB, bodyA.getWorldCenter)
     val joint = world.createJoint(jointDef)
   }
 }
