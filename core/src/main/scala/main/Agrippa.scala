@@ -13,7 +13,7 @@ object Agrippa extends Game {
   override def create() = {
     Box2D.init()
     GameWorld.createWorld()
-    GameWorld.createInitialPopulation(100)
+    GameWorld.createInitialPopulation(5)
     setScreen(new Drawer(new GdxProvider {}))
   }
 

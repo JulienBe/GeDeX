@@ -15,8 +15,8 @@ import scala.util.Random
   */
 class Creature {
 
-  var x = 20
-  var y = 20
+  var x = 30
+  var y = 40
 
   val sprite = {
     val sprite = new Sprite(Creature.texture)
@@ -25,9 +25,11 @@ class Creature {
   }
 
   def live(creatureGenome: CreatureGenome, world: World, mask: Short) = {
-    for (genome <- creatureGenome.bodies) {
-      val bodyDef = genome._1.createBodyDef(x, y, DynamicBody)
-      val body = genome._2.createShape(bodyDef, world, mask)
+    val bodies = List.tabulate(creatureGenome.bodies.length)( i =>
+      creatureGenome.bodies(i)._2.createShape(creatureGenome.bodies(i)._1.createBodyDef(x, y, DynamicBody), world, mask)
+    )
+    for (joint <- creatureGenome.joints) {
+      joint.createJoint(bodies, world)
     }
   }
 

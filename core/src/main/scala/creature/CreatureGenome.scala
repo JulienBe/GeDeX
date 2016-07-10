@@ -5,14 +5,20 @@ import scala.util.Random
 /**
   * Created by julein on 09/07/16.
   */
-case class CreatureGenome(val bodies: List[(BodyGenome, ShapeGenome)])
+case class CreatureGenome(val bodies: List[(BodyGenome, ShapeGenome)], val joints: List[JointGenome])
 
 object CreatureGenome {
+  val jointRatio = 2f
+
   def createGenome(minBodies: Int, maxBodies: Int) = {
     val nbBodies = Random.nextInt(maxBodies - minBodies) + 1
-    val genome = new CreatureGenome(List.tabulate(nbBodies)(i =>
+    val bodiesGenome = List.tabulate(nbBodies)(i =>
       new Tuple2[BodyGenome, ShapeGenome](BodyGenome.create(), ShapeGenome.create())
-    ))
-    genome
+    )
+    val nbJoint = (nbBodies - 1) + (Random.nextFloat() * nbBodies * 2)
+    val jointGenome = List.tabulate(nbJoint.toInt)(i =>
+      JointGenome.createJoint(bodiesGenome)
+    )
+    new CreatureGenome(bodiesGenome, jointGenome)
   }
 }

@@ -13,5 +13,6 @@ case class BodyGenome(val xOffset: Float, val yOFfset: Float, val linearDamping:
 }
 
 object BodyGenome {
-  def create() = new BodyGenome(Random.nextFloat() * 10, Random.nextFloat() * 10, Random.nextFloat(), Random.nextFloat())
+  val offsetMul = 20
+  def create() = new BodyGenome(Random.nextFloat() * offsetMul, Random.nextFloat() * offsetMul, Random.nextFloat(), Random.nextFloat())
 }

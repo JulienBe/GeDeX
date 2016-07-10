@@ -21,7 +21,7 @@ class Drawer(val gdxProvider: GdxProvider) extends Screen {
     spriteBatch.setProjectionMatrix(camera.combined)
 
     box2DDebugRenderer.render(GameWorld.box2Dworld, camera.combined)
-    GameWorld.box2Dworld.step(1/300f, 2, 6)
+    GameWorld.box2Dworld.step(1/45f, 6, 2)
 
     spriteBatch.begin()
 //    GameState.inst.tiles.foreach(_._2.draw(spriteBatch))
