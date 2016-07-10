@@ -25,5 +25,6 @@ object GameWorld {
     val list = List.tabulate(tilesNumber)(i => new Tuple2[Int, Tile](i, Tile.getTile(i, 1, box2Dworld)))
     GameState.setTiles(list)
   }
-  def getMaxRight() = creatures.maxBy(_.rightCenter().x).rightCenter()
+  def getMaxRight() = creatures.maxBy(_.rightCenter().x)
+
 }

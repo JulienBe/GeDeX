@@ -5,6 +5,7 @@ import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.GL20
 import main.Agrippa._
 import world.GameWorld
+import world.genetic.Biomanip
 
 /**
   * Created by julein on 05/07/16.
@@ -16,7 +17,7 @@ class Drawer(gdxProvider: GdxProvider) extends Screener(gdxProvider) with GdxPro
   var finished = false
 
   override def render(delta: Float) = {
-    camera.position.set(GameWorld.getMaxRight().x, camera.position.y, camera.position.y)
+    camera.position.set(Biomanip.getMostFit(GameWorld.creatures).rightCenter().x, camera.position.y, camera.position.y)
     camera.update()
     Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT)
 
