@@ -14,8 +14,9 @@ class Drawer(val gdxProvider: GdxProvider) extends Screen {
   val shapeRenderer = gdxProvider.getShapeRenderer()
   val spriteBatch = gdxProvider.getSpriteBatch()
   val camera = gdxProvider.getCamera()
-;
+
   override def render(delta: Float) = {
+    camera.position.set(GameWorld.getMaxRight().x, camera.position.y, camera.position.y)
     camera.update()
     Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT)
     spriteBatch.setProjectionMatrix(camera.combined)

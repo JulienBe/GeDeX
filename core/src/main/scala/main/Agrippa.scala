@@ -11,8 +11,8 @@ object Agrippa extends Game {
   val system = ActorSystem()
 
   override def create() = {
-    Box2D.init()
-    GameWorld.createWorld()
+    Box2D.init
+    GameWorld.createWorld
     GameWorld.createInitialPopulation(5)
     setScreen(new Drawer(new GdxProvider {}))
   }
