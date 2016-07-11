@@ -5,15 +5,17 @@ import com.badlogic.gdx.Game
 import com.badlogic.gdx.physics.box2d.Box2D
 import draw.{Drawer, GdxProvider}
 import world.GameWorld
+import world.genetic.Biomanip
 
 object Agrippa extends Game {
 
   val system = ActorSystem()
+  val populationSize = 200
 
   override def create() = {
     Box2D.init
     GameWorld.createWorld
-    GameWorld.createInitialPopulation(50)
+    GameWorld.creatures = Biomanip.createInitialPopulation(populationSize, GameWorld.box2Dworld)
     setScreen(new Drawer(new GdxProvider {}))
   }
 

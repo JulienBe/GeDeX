@@ -23,4 +23,6 @@ object CreatureGenome {
     )
     new CreatureGenome(bodiesGenome, jointGenome)
   }
+
+
 }

@@ -8,14 +8,14 @@ import scala.util.Random
 /**
   * Created by julein on 10/07/16.
   */
-case class JointGenome(bodiesIndexes: (Int, Int), dampingRatio: Float, freq: Float, length: Float) {
+case class JointGenome(bodiesIndexes: (Int, Int), speed: Float, torque: Float, length: Float) {
   def createJoint(bodies: List[Body], world: World) = {
     val bodyA = bodies(bodiesIndexes._1)
     val bodyB = bodies(bodiesIndexes._2)
     val jointDef = new RevoluteJointDef
     jointDef.enableMotor = true
-    jointDef.motorSpeed = 600
-    jointDef.maxMotorTorque = 600
+    jointDef.motorSpeed = speed
+    jointDef.maxMotorTorque = torque
     jointDef.initialize(bodyA, bodyB, bodyA.getWorldCenter)
     val joint = world.createJoint(jointDef)
   }
@@ -24,8 +24,6 @@ case class JointGenome(bodiesIndexes: (Int, Int), dampingRatio: Float, freq: Flo
 object JointGenome {
   /**
     * TODO : joint with center only for the moment
-    *
-    * @param bodies
     */
   def createJoint(bodies: List[(BodyGenome, ShapeGenome)]) = {
     val index1 = Random.nextInt(bodies.length)
