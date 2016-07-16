@@ -12,9 +12,9 @@ import world.genetic.Biomanip
 class SelectionScreen(gdxProvider: GdxProvider) extends Screener(gdxProvider) {
 
   override def render(delta: Float) = {
-    Gdx.app.log("Debug", "max : " + GameWorld.creatures.maxBy(_.rightCenter().x).rightCenter().x)
+    Gdx.app.log("Debug", Biomanip.gen + " : " + GameWorld.creatures.maxBy(_.rightCenter().x).rightCenter().x)
     GameWorld.creatures = Biomanip.kill(GameWorld.creatures)
-    GameWorld.creatures = Biomanip.fillGaps(Agrippa.populationSize, GameWorld.creatures)
+    GameWorld.creatures = Biomanip.spawnNewCreatures(Agrippa.populationSize, GameWorld.creatures)
     Biomanip.live(GameWorld.creatures, GameWorld.box2Dworld)
     setScreen(new Drawer(this))
   }

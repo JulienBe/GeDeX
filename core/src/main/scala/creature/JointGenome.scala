@@ -1,7 +1,9 @@
 package creature
 
+import brols.Creator
 import com.badlogic.gdx.physics.box2d.joints.RevoluteJointDef
 import com.badlogic.gdx.physics.box2d.{Body, World}
+import world.genetic.Biomanip
 
 import scala.util.Random
 
@@ -22,20 +24,32 @@ case class JointGenome(bodiesIndexes: (Int, Int), speed: Float, torque: Float, l
 }
 
 object JointGenome {
+  def getMutation(joint: JointGenome): JointGenome = {
+    new JointGenome(
+      joint.bodiesIndexes,
+      Biomanip.basicMutation(joint.speed, true, 300),
+      Biomanip.basicMutation(joint.torque, true, 300),
+      Biomanip.basicMutation(joint.length, true, 2)
+    )
+  }
+
+  val baseTorque = 150
+  val baseSpeed = 10
   /**
     * TODO : joint with center only for the moment
     */
   def createJoint(bodies: List[(BodyGenome, ShapeGenome)]) = {
     val index1 = Random.nextInt(bodies.length)
-    val index2 = (index1 + 1) % bodies.length
-    val damping = Random.nextFloat() * 5
-    val freq = Random.nextFloat() * 5
-    val length = Random.nextFloat() * 10
+    val index2 = Creator.randomIntNot(bodies.length, index1)
+    val speed = baseSpeed + Random.nextFloat() * baseSpeed
+    val torque = baseTorque + Random.nextFloat() * 50
+    val length = Random.nextFloat() * 3
     new JointGenome(
       (index1, index2),
-      damping,
-      freq,
+      speed,
+      torque,
       length
     )
   }
+
 }

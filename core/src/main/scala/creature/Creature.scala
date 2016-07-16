@@ -18,7 +18,7 @@ class Creature(val genome: CreatureGenome) {
 
   var fitness = 0f
   var x = 30
-  var y = 40
+  var y = 25
   var bodies: List[Body] = List.empty
 
   val sprite = {

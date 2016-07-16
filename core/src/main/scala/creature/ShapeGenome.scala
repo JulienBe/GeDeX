@@ -1,5 +1,6 @@
 package creature
 
+import brols.Creator
 import com.badlogic.gdx.physics.box2d.{Body, BodyDef, World}
 import world.PhysicWizard
 
@@ -13,5 +14,11 @@ case class ShapeGenome(val width: Float, val height: Float) {
 }
 
 object ShapeGenome {
+  def getMutation(shapeGenome: ShapeGenome) = {
+    new ShapeGenome(
+      Creator.valueInBounds(0.1f, 10f),
+      Creator.valueInBounds(0.1f, 10f)
+    )
+  }
   def create() = new ShapeGenome(Random.nextFloat() * 10, Random.nextFloat() * 10)
 }
