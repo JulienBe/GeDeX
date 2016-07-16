@@ -10,7 +10,7 @@ import main.GameState
   */
 object GameWorld {
 
-  val tilesNumber = 100
+  val tilesNumber = 300
   val width = 160
   val height = 100
   val box2Dworld = new World(new Vector2(0f, -9.89f), true)

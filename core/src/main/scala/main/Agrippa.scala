@@ -10,7 +10,7 @@ import world.genetic.Biomanip
 object Agrippa extends Game {
 
   val system = ActorSystem()
-  val populationSize = 200
+  val populationSize = 100
 
   override def create() = {
     Box2D.init
