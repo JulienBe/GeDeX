@@ -11,6 +11,12 @@ object Creator {
   def boolean = Random.nextBoolean
   def int(max: Int) = Random.nextInt(max)
   def valueInBounds(min: Float, max: Float) = min + (Random.nextFloat() * (max - min))
+  def positiveValueInBounds(min: Float, max: Float) = {
+    if (min < 0)
+      valueInBounds(0, max)
+    else
+      valueInBounds(min, max)
+  }
 
   /**
     * >= min && < max

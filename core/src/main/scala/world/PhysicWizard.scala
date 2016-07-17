@@ -21,9 +21,19 @@ object PhysicWizard {
     val body = world.createBody(bodyDef)
     val shape = getShape(width, height, shapeType)
     val fixture = body.createFixture(shape, 1)
+    val massData = new MassData
+    massData.mass = getMass(width, height, shapeType)
+    body.setMassData(massData)
     setFilter(mask, category, fixture)
     shape.dispose()
     body
+  }
+
+  def getMass(width: Float, height: Float, shapeType: Shape.Type): Float = {
+    shapeType match {
+      case Shape.Type.Polygon => width * height
+      case Shape.Type.Circle => (width * Math.PI * Math.PI).toFloat
+    }
   }
 
   def getShape(width: Float, height: Float, shapeType: Shape.Type): Shape = {

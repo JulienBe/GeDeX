@@ -10,14 +10,14 @@ import scala.util.Random
 /**
   * Created by julein on 10/07/16.
   */
-case class JointGenome(bodiesIndexes: (Int, Int), speed: Float, torque: Float, length: Float) {
+case class JointGenome(bodiesIndexes: (Int, Int), speed: Float, length: Float) {
   def createJoint(bodies: List[Body], world: World) = {
     val bodyA = bodies(bodiesIndexes._1)
     val bodyB = bodies(bodiesIndexes._2)
     val jointDef = new RevoluteJointDef
     jointDef.enableMotor = true
     jointDef.motorSpeed = speed
-    jointDef.maxMotorTorque = torque
+    jointDef.maxMotorTorque = (bodyA.getMass * bodyB.getMass) * 2
     jointDef.initialize(bodyA, bodyB, bodyA.getWorldCenter)
     val joint = world.createJoint(jointDef)
   }
@@ -28,7 +28,6 @@ object JointGenome {
     new JointGenome(
       joint.bodiesIndexes,
       Biomanip.basicMutation(joint.speed, true, 300),
-      Biomanip.basicMutation(joint.torque, true, 300),
       Biomanip.basicMutation(joint.length, true, 2)
     )
   }
@@ -42,12 +41,10 @@ object JointGenome {
     val index1 = Random.nextInt(bodies.length)
     val index2 = Creator.randomIntNot(bodies.length, index1)
     val speed = baseSpeed + Random.nextFloat() * baseSpeed
-    val torque = baseTorque + Random.nextFloat() * 50
     val length = Random.nextFloat() * 3
     new JointGenome(
       (index1, index2),
       speed,
-      torque,
       length
     )
   }

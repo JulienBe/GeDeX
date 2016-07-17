@@ -11,16 +11,17 @@ import scala.util.Random
   */
 object Biomanip {
 
-  val percentageToKeep = 0.20f
-  val mutationRate = 6
+  val percentageToKeep = 0.5f
   val mutationAmplitude = 3
   var gen = 0
+  val bodiesMin = 2
+  val bodiesMax = 8
 
   def kill(creatures: List[Creature]): List[Creature] = {
     gen += 1
     determineFitness(creatures)
     GameWorld.removeAllBodies
-    creatures.sortBy(_.fitness).slice((creatures.length * percentageToKeep).toInt, creatures.length - 1)
+    creatures.sortBy(_.fitness).slice((creatures.length * percentageToKeep).toInt, creatures.length)
   }
   def determineFitness(creatures: List[Creature]) = {
     val max = getMostFit(creatures).rightCenter().x
@@ -39,7 +40,7 @@ object Biomanip {
       getNewMutation(selectedGenomes(Random.nextInt(selectedGenomes.size)))
     )
     val freshGen = List.tabulate(gapSize / 2)(i =>
-      new Creature(CreatureGenome.createGenome(2, 10))
+      new Creature(CreatureGenome.createGenome(bodiesMin, bodiesMax))
     )
     val newCreatures = newGen.map(new Creature(_))
     creatures ::: newCreatures ::: freshGen
@@ -52,8 +53,6 @@ object Biomanip {
     new CreatureGenome(mutatedBodies, mutatedJoint)
   }
   def basicMutation(base: Float, floor: Boolean = true, factor: Float = mutationAmplitude): Float = {
-    if (Random.nextInt(mutationRate) == 0)
-      return base
     val next = base + (Random.nextFloat() - .5f) * factor
     if (floor && next < 0)
       return 0
