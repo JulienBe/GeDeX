@@ -3,7 +3,7 @@ package world
 import com.badlogic.gdx.files.FileHandle
 import com.badlogic.gdx.graphics.Texture
 import com.badlogic.gdx.graphics.g2d.Sprite
-import com.badlogic.gdx.physics.box2d.{BodyDef, World}
+import com.badlogic.gdx.physics.box2d.{BodyDef, Shape, World}
 
 /**
   * Created by julein on 26/06/16.
@@ -27,7 +27,7 @@ object Tile {
     tile.setRegion(tr)
     tile.setBounds(x * width, y * height, width, height)
     PhysicWizard.setBodyDefPos(x * width, y * height, width, height, tile.bodyDef)
-    PhysicWizard.createBox(tile.bodyDef, width, height, world, mask, category)
+    PhysicWizard.createBox(tile.bodyDef, width, height, world, mask, category, Shape.Type.Polygon)
     tile
   }
 
