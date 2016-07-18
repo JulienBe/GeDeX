@@ -22,7 +22,7 @@ object Tile {
   /**
     * Number are passed in the tile grid coordinates
     */
-  def getTile(x: Int, y: Int, world: World): Tile = {
+  def getTile(x: Int, y: Float, world: World): Tile = {
     val tile = new Tile()
     tile.setRegion(tr)
     tile.setBounds(x * width, y * height, width, height)
