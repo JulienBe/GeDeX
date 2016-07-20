@@ -36,6 +36,7 @@ class Creature(val genome: CreatureGenome) {
     this
   }
 
+  def upper = bodies.maxBy(_.getWorldCenter.y).getWorldCenter
   def rightCenter() = bodies.maxBy(_.getWorldCenter.x).getWorldCenter
 
 }
