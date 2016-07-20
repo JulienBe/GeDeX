@@ -17,23 +17,25 @@ case class JointGenome(bodiesIndexes: (Int, Int), speed: Float, length: Float) {
     val jointDef = new RevoluteJointDef
     jointDef.enableMotor = true
     jointDef.motorSpeed = speed
-    jointDef.maxMotorTorque = (bodyA.getMass * bodyB.getMass) * 2
+    jointDef.maxMotorTorque = bodyA.getMass * JointGenome.torqueToMass
     jointDef.initialize(bodyA, bodyB, bodyA.getWorldCenter)
     val joint = world.createJoint(jointDef)
   }
 }
 
 object JointGenome {
+
+  val baseSpeed = 5
+  val baseLength = 2
+  val torqueToMass = 8
+
   def getMutation(joint: JointGenome): JointGenome = {
     new JointGenome(
       joint.bodiesIndexes,
-      Biomanip.basicMutation(joint.speed, true, 300),
+      Creator.positiveValueInBounds(joint.speed - 4, joint.speed + 4),
       Biomanip.basicMutation(joint.length, true, 2)
     )
   }
-
-  val baseTorque = 150
-  val baseSpeed = 10
   /**
     * TODO : joint with center only for the moment
     */
@@ -41,7 +43,7 @@ object JointGenome {
     val index1 = Random.nextInt(bodies.length)
     val index2 = Creator.randomIntNot(bodies.length, index1)
     val speed = baseSpeed + Random.nextFloat() * baseSpeed
-    val length = Random.nextFloat() * 3
+    val length = Creator.float * baseLength
     new JointGenome(
       (index1, index2),
       speed,

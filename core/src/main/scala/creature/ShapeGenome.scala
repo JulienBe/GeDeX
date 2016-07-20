@@ -16,11 +16,12 @@ case class ShapeGenome(width: Float, height: Float, shapeType: Shape.Type) {
 object ShapeGenome {
 
   val sizeFactor = 10
+  val mutationAmplitude = 2
 
   def getMutation(shapeGenome: ShapeGenome) = {
     new ShapeGenome(
-      Creator.valueInBounds(0.1f, 10f),
-      Creator.valueInBounds(0.1f, 10f),
+      Creator.positiveValueInBounds(shapeGenome.width - mutationAmplitude, shapeGenome.width + mutationAmplitude),
+      Creator.positiveValueInBounds(shapeGenome.height - mutationAmplitude, shapeGenome.height + mutationAmplitude),
       shapeGenome.shapeType
     )
   }

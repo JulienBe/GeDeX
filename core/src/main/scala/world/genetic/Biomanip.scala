@@ -16,6 +16,8 @@ object Biomanip {
   var gen = 0
   val bodiesMin = 2
   val bodiesMax = 8
+  val mutatedRatio = 0.8f
+  val freshRatio = 1 - mutatedRatio
 
   def kill(creatures: List[Creature]): List[Creature] = {
     gen += 1
@@ -36,10 +38,10 @@ object Biomanip {
     val gapSize = populationSize - creatures.size
     val selectedGenomes: List[CreatureGenome] = creatures.map(_.genome)
 
-    val newGen = List.tabulate(gapSize / 2)(i =>
+    val newGen = List.tabulate((gapSize * mutatedRatio).toInt)(i =>
       getNewMutation(selectedGenomes(Random.nextInt(selectedGenomes.size)))
     )
-    val freshGen = List.tabulate(gapSize / 2)(i =>
+    val freshGen = List.tabulate((gapSize * freshRatio).toInt)(i =>
       new Creature(CreatureGenome.createGenome(bodiesMin, bodiesMax))
     )
     val newCreatures = newGen.map(new Creature(_))

@@ -21,9 +21,7 @@ object PhysicWizard {
     val body = world.createBody(bodyDef)
     val shape = getShape(width, height, shapeType)
     val fixture = body.createFixture(shape, 1)
-    val massData = new MassData
-    massData.mass = getMass(width, height, shapeType)
-    body.setMassData(massData)
+    fixture.setDensity(getMass(width, height, shapeType))
     setFilter(mask, category, fixture)
     shape.dispose()
     body
