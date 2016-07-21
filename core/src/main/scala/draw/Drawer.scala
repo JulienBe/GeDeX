@@ -13,8 +13,11 @@ import world.genetic.Biomanip
 class Drawer(gdxProvider: GdxProvider) extends Screener(gdxProvider) with GdxProvider {
 
   val box2DDebugRenderer = gdxProvider.getBox2DRendered()
-  val timer = new Timer(20)
+  val timer = new Timer(120)
   var finished = false
+  val step = 1/45f
+  val nbStep = 15
+  val physicTime = step * nbStep
 
   override def render(delta: Float) = {
     camera.position.set(Biomanip.getMostFit(GameWorld.creatures).rightCenter().x, camera.position.y, camera.position.y)
@@ -22,12 +25,11 @@ class Drawer(gdxProvider: GdxProvider) extends Screener(gdxProvider) with GdxPro
     Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT)
 
     box2DDebugRenderer.render(GameWorld.box2Dworld, camera.combined)
-
-    for (i <- 0 until 15)
-      GameWorld.box2Dworld.step(1/300f, 6, 2)
+    for (i <- 0 until nbStep)
+      GameWorld.box2Dworld.step(step, 6, 2)
     GameWorld.creatures.foreach(c => if (c.upper.y > GameWorld.height) c.bodies.foreach(_.setActive(false)))
 
-    if (timer.step(delta)) {
+    if (timer.step(physicTime)) {
       setScreen(new SelectionScreen(this))
     }
   }
