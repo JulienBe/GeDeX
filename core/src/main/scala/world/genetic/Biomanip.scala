@@ -1,5 +1,6 @@
 package world.genetic
 
+import brols.Creator
 import com.badlogic.gdx.physics.box2d.World
 import creature._
 import world.GameWorld
@@ -10,13 +11,12 @@ import scala.util.Random
   * Created by julein on 10/07/16.
   */
 object Biomanip {
-
   val percentageToKeep = 0.5f
   val mutationAmplitude = 3
   var gen = 0
   val bodiesMin = 2
   val bodiesMax = 8
-  val mutatedRatio = 0.8f
+  val mutatedRatio = 0.6f
   val freshRatio = 1 - mutatedRatio
 
   def kill(creatures: List[Creature]): List[Creature] = {
@@ -61,11 +61,12 @@ object Biomanip {
     next
   }
 
+  def mutateFloat(f: Float, mutator: Mutator) = Creator.valueInBoundsWithCheck(f - mutator.factor, f + mutator.factor, mutator.min, mutator.max)
+  def createFloat(mutator: Mutator) = Creator.valueInBounds(mutator.min, mutator.max)
   def createInitialPopulation(size: Int, world: World) = List.tabulate(size)(i => new Creature(CreatureGenome.createGenome(2, 12)).live(world))
   def live(creatures: List[Creature], world: World) = creatures.foreach(_.live(world))
   def getMostFit(creatures: List[Creature]) = GameWorld.getMaxRight()
   def getLessFit(creatures: List[Creature]) = GameWorld.getMinRight()
-
   def linearElimination(f: Float) = f >= Random.nextFloat()
 
 }
