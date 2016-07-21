@@ -17,13 +17,17 @@ object ShapeGenome {
 
   val sizeFactor = 10
   val mutationAmplitude = 2
+  val minDimension = 1
 
   def getMutation(shapeGenome: ShapeGenome) = {
     new ShapeGenome(
-      Creator.positiveValueInBounds(shapeGenome.width - mutationAmplitude, shapeGenome.width + mutationAmplitude),
-      Creator.positiveValueInBounds(shapeGenome.height - mutationAmplitude, shapeGenome.height + mutationAmplitude),
+      Creator.positiveValueInBounds(minDimension + shapeGenome.width - mutationAmplitude, minDimension + shapeGenome.width + mutationAmplitude),
+      Creator.positiveValueInBounds(minDimension + shapeGenome.height - mutationAmplitude, minDimension + shapeGenome.height + mutationAmplitude),
       shapeGenome.shapeType
     )
   }
-  def create() = new ShapeGenome(Random.nextFloat() * sizeFactor, Random.nextFloat() * sizeFactor, if (Creator.boolean) Shape.Type.Circle else Shape.Type.Polygon)
+  def create() = new ShapeGenome(
+    minDimension + Random.nextFloat() * sizeFactor,
+    minDimension + Random.nextFloat() * sizeFactor,
+    if (Creator.boolean) Shape.Type.Circle else Shape.Type.Polygon)
 }
